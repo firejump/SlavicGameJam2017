@@ -1,0 +1,8 @@
+#
+# UnityYAMLMerge fallback file for meld
+#
+# Edit to match where meld is installed on your matchine, then
+# move to Unity\Editor\Data\Tools\mergespecfile.txt.
+# 
+
+* use "c:\home\software\meld\meld.exe" "%l" "%r" "%b" -o "%d" --auto-merge
