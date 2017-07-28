@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7088a47bc452b0449897ab7660601909
+timeCreated: 1501278888
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - road: {instanceID: 0}
+  - roadTurn: {instanceID: 0}
+  - roadPochyly: {instanceID: 0}
+  - grass: {instanceID: 0}
+  - grassPochyly: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
