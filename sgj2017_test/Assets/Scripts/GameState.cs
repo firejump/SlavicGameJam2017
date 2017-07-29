@@ -1,4 +1,6 @@
-﻿public class GameState {
+﻿using System.Collections.Generic;
+
+public class GameState {
     private GameState() {
         playerState = new PlayerState();
         setPlayerDefaults();
@@ -26,15 +28,26 @@
         return playerState;
     }
 
-    public void updatePlayerState(object slotsValues)
+    public void updatePlayerState(List<int> slots)
     {
-        
-		//TODO set player features depending on slots values
+        List<KeyValuePair<string, string>> featuresValues = PlayerState.getFeaturesAndValues();
+        foreach (int slot in slots) {
+            if (slot >= featuresValues.Count) {
+                UnityEngine.Debug.Log("Slot above number of features!");
+                continue;
+            }
+            KeyValuePair<string, string> featureValue = featuresValues[slot];
+            getPlayerState().setFeature(featureValue.Key, featureValue.Value);
+        }
     }
 
     public void generateSlotsRules()
     {
 
+    }
+
+    public void startTowerDefense() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("bartekDevScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     private PlayerState playerState;

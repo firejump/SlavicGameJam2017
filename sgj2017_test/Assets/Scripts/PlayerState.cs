@@ -21,6 +21,15 @@ public class PlayerState {
         { "lumination:shiny", new LampComposer() }
     };
 
+    public static List<KeyValuePair<string, string>> getFeaturesAndValues() {
+        List < KeyValuePair<string, string> > list = new List<KeyValuePair<string, string>>();
+        foreach (string feature in PLAYER_COMPOSERS.Keys) {
+            string[] featureValue = feature.Split(':');
+            list.Add(new KeyValuePair<string, string>(featureValue[0], featureValue[1]));
+        }
+        return list;
+    }
+
     private Dictionary<string, string> features = new Dictionary<string, string>();
 
     public GameObject createPlayerObject() {
