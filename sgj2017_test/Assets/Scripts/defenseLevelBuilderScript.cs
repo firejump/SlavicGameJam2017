@@ -16,6 +16,8 @@ public class defenseLevelBuilderScript : MonoBehaviour {
 
     public GameObject player; // this is actually player and camera
 
+    private int mapBorderWidth = 10;
+
     private string heightMap = "dUu         ";
 
     // WARNING: map can't have roads on the map edge! (waypoints algo will break)
@@ -26,9 +28,11 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     // " " == grass
     // s == start point
     // r = ravine (wąwóz)
+    // l = no light
+    // L = no light event trigger
     private string[,] map = {
         { " ", " ", " ", " ", " " , " ", " ", " "},
-        { " ", "7", "-", "-", "-" , "9", " ", " "},
+        { " ", "7", "-l", "-lL", "-l" , "9", " ", " "},
         { " ", "|", " ", " ", " " , "|", " ", " "},
         { " 6", "|", " ", " ", " " , "|", " ", " "},
         { " ", "|", " 4", " ", " " , "1", "-", " "},
@@ -49,8 +53,10 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     void Start () {
         GenerateWaypoints();
         player.GetComponent<Transform>().position = waypoints[0];
-        instantiateMapTiles();	
+        instantiateMapTiles();
+        instantiateBorders();
 	}
+
 
     private void instantiateMapTiles() {
         for (int x = 0; x < map.GetLength(0); x++) {
@@ -62,7 +68,7 @@ public class defenseLevelBuilderScript : MonoBehaviour {
             }
             for (int z = 0; z < map.GetLength(1); z++) {
                 string s = map[x, z];
-                bool hasLight = s[0] != ' ';
+                bool hasLight = s[0] != ' ' && !s.Contains("l") ;
                 Vector3 position = new Vector3(x, y, z);
                 if (hasLight) {
                     Instantiate(tileLight, position, Quaternion.Euler(0, 0, 0));
@@ -98,6 +104,30 @@ public class defenseLevelBuilderScript : MonoBehaviour {
                 if (s.Contains("8")) Instantiate(flower, position, Quaternion.Euler(0, 270, 0));
 
                 if (s.Contains("r")) Instantiate(ravine, position, Quaternion.Euler(0, 90, 0));
+            }
+        }
+    }
+
+    private void instantiateBorders() {
+        for (int x = -mapBorderWidth; x < map.GetLength(0) + mapBorderWidth; x++) {
+            float y = 0;
+            char height;
+            if (x >= 0 && x < map.GetLength(0)) {
+                height = heightMap[x];
+            }
+            else {
+                height = ' ';
+            }
+            if (height == 'U') {
+                y = 0.5f;
+            }
+            for (int z = -mapBorderWidth; z < map.GetLength(1) + mapBorderWidth; z++) {
+                if (x >=0 && x < map.GetLength(0) && z >=0 && z < map.GetLength(1)) {
+                    //in map, skip
+                    continue;
+                }
+                Vector3 position = new Vector3(x, y, z);
+                InstantiatePochyly(height, grass, grassPochyly, position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
