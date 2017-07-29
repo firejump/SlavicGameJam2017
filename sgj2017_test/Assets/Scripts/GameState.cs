@@ -53,6 +53,7 @@ public class GameState {
     }
 
     public void startTowerDefense() {
+        UnityEngine.Debug.Log("Start tower");
         UnityEngine.SceneManagement.SceneManager.LoadScene("bartekDevScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
