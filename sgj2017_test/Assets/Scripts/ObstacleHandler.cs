@@ -5,6 +5,23 @@ public abstract class ObstacleHandler
 {
     public abstract bool check();
     public abstract void onHit(MonoBehaviour obstacle);
+
+    // prevent multiple triggering
+    private static bool EXPLODED = false;
+
+    /**
+     * Helper method to make player explosion animation
+     */
+    public static void explodePlayer()
+    {
+        if (!EXPLODED)
+        {
+            EXPLODED = true;
+            GameObject actualPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
+            ParticleExploderScript.Explode(actualPlayer, actualPlayer.GetComponent<Transform>().position);
+            GameObject.Destroy(actualPlayer);
+        }
+    }
 }
 
 public class RavineHandler : ObstacleHandler {
@@ -12,7 +29,10 @@ public class RavineHandler : ObstacleHandler {
     {
         return GameState.getInstance().getPlayerState().checkFeature("size", "l");
     }
-    public override void onHit(MonoBehaviour obstacle) { }
+    public override void onHit(MonoBehaviour obstacle)
+    {
+        explodePlayer();
+    }
 }
 
 public class FlowerHandler : ObstacleHandler
@@ -24,6 +44,7 @@ public class FlowerHandler : ObstacleHandler
     }
     public override void onHit(MonoBehaviour obstacle) {
         obstacle.GetComponentInChildren<Animator>().SetBool("killing", true);
+        explodePlayer();
     }
 }
 
@@ -34,5 +55,9 @@ public class SlopeHandler : ObstacleHandler
         PlayerState state = GameState.getInstance().getPlayerState();
         return !(state.checkFeature("shape", "ball") || state.checkFeature("character", "energetic"));
     }
-    public override void onHit(MonoBehaviour obstacle) { }
+    public override void onHit(MonoBehaviour obstacle)
+    {
+        // TODO use other animation
+        explodePlayer();
+    }
 }
