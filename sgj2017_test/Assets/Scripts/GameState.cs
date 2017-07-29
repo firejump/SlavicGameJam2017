@@ -28,7 +28,8 @@
 
     public void updatePlayerState(object slotsValues)
     {
-        //TODO set player features depending on slots values
+        
+		//TODO set player features depending on slots values
     }
 
     public void generateSlotsRules()
