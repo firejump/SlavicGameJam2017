@@ -16,7 +16,12 @@ public class ParticleExploderScript : MonoBehaviour {
             GameObject particle = Instantiate(particleBase);
             particle.GetComponent<Transform>().position = position + new Vector3(xf, yf, zf);
             particle.GetComponent<Transform>().localScale = new Vector3(particleScale, particleScale, particleScale);
-            particle.AddComponent<Rigidbody>();
+            if (!particle.GetComponent<Rigidbody>())
+            {
+                particle.AddComponent<Rigidbody>();
+            }
+            particle.GetComponent<Rigidbody>().isKinematic = false;
+            particle.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
             particle.GetComponent<Rigidbody>().mass = Random.Range(0.7f, 1.3f);
             particle.GetComponent<Rigidbody>().AddExplosionForce(200f, position, 2);
         }
