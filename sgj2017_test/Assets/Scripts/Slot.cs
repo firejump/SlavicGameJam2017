@@ -21,8 +21,10 @@ public class Slot : MonoBehaviour {
 	}
 	public void StartMachine(){
 		button.interactable = false;
-		foreach (SpriteChanger img in imgs) {
-			img.StartCoroutines();
+		if (active) {
+			foreach (SpriteChanger img in imgs) {
+				img.StartCoroutines();
+			}
 		}
 	} 
 	public int getSlotState(){
@@ -30,14 +32,18 @@ public class Slot : MonoBehaviour {
 	}
 	public void StopMachine(){
 		button.interactable = true;
-		foreach (SpriteChanger img in imgs) {
-			img.StopCoroutines();
+		if (active) {
+			foreach (SpriteChanger img in imgs) {
+				img.StopCoroutines ();
+			}
 		}
 	}
 
 	public void ToggleSlotMachine(){
 		active = !active;
 		text.text = active ? "Free": "Locked";
-
+		if (active) {
+		
+		}
 	}
 }
