@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SlotImg
   - mushroomAnimator
+  - LockButton
   layers:
   - Default
   - TransparentFX
