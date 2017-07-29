@@ -18,6 +18,8 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     public GameObject rock;
     public GameObject darkness;
 
+    public GameObject bacteriaNameText;
+
     // 0 red 1 green 2 blue
     private int attacker = 0;
     private GameObject getAttacker() {
@@ -70,6 +72,7 @@ public class defenseLevelBuilderScript : MonoBehaviour {
         player.GetComponent<Transform>().position = waypoints[0];
         instantiateMapTiles();
         instantiateBorders();
+        bacteriaNameText.GetComponent<UnityEngine.UI.Text>().text = BacteriaNamesScript.getNewName();
 	}
 
 
