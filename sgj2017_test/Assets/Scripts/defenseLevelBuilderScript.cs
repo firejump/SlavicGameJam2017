@@ -16,6 +16,8 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     public GameObject attackerBlue;
     public GameObject ravine;
     public GameObject rock;
+    public GameObject darkness;
+
     // 0 red 1 green 2 blue
     private int attacker = 2;
     private GameObject getAttacker() {
@@ -118,6 +120,7 @@ public class defenseLevelBuilderScript : MonoBehaviour {
 
                 if (s.Contains("r")) Instantiate(ravine, position, Quaternion.Euler(0, 90, 0));
                 if (s.Contains("R")) Instantiate(rock, position, Quaternion.Euler(0, 0, 0));
+                if (s.Contains("L")) Instantiate(darkness, position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
