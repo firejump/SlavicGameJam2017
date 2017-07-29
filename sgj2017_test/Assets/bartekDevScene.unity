@@ -210,13 +210,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 581883793}
-  m_LocalRotation: {x: 0.31391987, y: -0.35088366, z: -0.1710267, w: 0.8654969}
+  m_LocalRotation: {x: 0.33671817, y: -0.48134568, z: -0.120066375, w: 0.8003195}
   m_LocalPosition: {x: 11.94, y: 5.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25.048, y: -52.088, z: -34.746002}
+  m_LocalEulerAnglesHint: {x: 25.048, y: -70, z: -34.746002}
 --- !u!1 &809470501
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,8 +265,14 @@ MonoBehaviour:
   grassPochyly: {fileID: 1224663836393134, guid: f432faa460d200a43a74c4d23e83c2bf,
     type: 2}
   tileLight: {fileID: 1768421825043686, guid: 693b0344cda726b408a012a03cba60ee, type: 2}
-  flower: {fileID: 1848268473768704, guid: 326d1e09be2e2004b90fab9863ebe50d, type: 2}
+  attackerRed: {fileID: 1456328672028930, guid: 684c15caa824900449d857fb34df10f9,
+    type: 2}
+  attackerGreen: {fileID: 1940736386226606, guid: 993ebdfa1b784724082bff6fde31f257,
+    type: 2}
+  attackerBlue: {fileID: 1626900464132742, guid: 58103510bf4e7be4193350ae01e17490,
+    type: 2}
   ravine: {fileID: 1091781065699050, guid: e94ce5122f226be47ae2f5cec0826bed, type: 2}
+  rock: {fileID: 1789063409612528, guid: 51860ffca7b7b514691148d24da1185c, type: 2}
   player: {fileID: 70495947}
 --- !u!1 &997804797
 GameObject:
@@ -344,7 +350,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997804797}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 70495948}

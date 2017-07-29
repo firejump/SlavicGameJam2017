@@ -11,14 +11,24 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     public GameObject grass;
     public GameObject grassPochyly;
     public GameObject tileLight;
-    public GameObject flower;
+    public GameObject attackerRed;
+    public GameObject attackerGreen;
+    public GameObject attackerBlue;
     public GameObject ravine;
+    public GameObject rock;
+    // 0 red 1 green 2 blue
+    private int attacker = 2;
+    private GameObject getAttacker() {
+        if (attacker == 0) return attackerRed;
+        if (attacker == 1) return attackerGreen;
+        return attackerBlue;
+    }
 
     public GameObject player; // this is actually player and camera
 
     private int mapBorderWidth = 10;
 
-    private string heightMap = "dUu         ";
+    private string heightMap = "  dUu         ";
 
     // WARNING: map can't have roads on the map edge! (waypoints algo will break)
     // WARNING: start & endpoint can only have one road neighbour
@@ -28,11 +38,14 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     // " " == grass
     // s == start point
     // r = ravine (wąwóz)
+    // R = rock
     // l = no light
     // L = no light event trigger
     private string[,] map = {
         { " ", " ", " ", " ", " " , " ", " ", " "},
         { " ", "7", "-l", "-lL", "-l" , "9", " ", " "},
+        { " ", "|", " ", " ", " " , "|", " ", " "},
+        { " ", "|", " ", " R", " " , "|", " ", " "},
         { " ", "|", " ", " ", " " , "|", " ", " "},
         { " 6", "|", " ", " ", " " , "|", " ", " "},
         { " ", "|", " 4", " ", " " , "1", "-", " "},
@@ -98,12 +111,13 @@ public class defenseLevelBuilderScript : MonoBehaviour {
 
                 // flower
 
-                if (s.Contains("6")) Instantiate(flower, position, Quaternion.Euler(0, 0, 0));
-                if (s.Contains("2")) Instantiate(flower, position, Quaternion.Euler(0, 90, 0));
-                if (s.Contains("4")) Instantiate(flower, position, Quaternion.Euler(0, 180, 0));
-                if (s.Contains("8")) Instantiate(flower, position, Quaternion.Euler(0, 270, 0));
+                if (s.Contains("6")) Instantiate(getAttacker(), position, Quaternion.Euler(0, 0, 0));
+                if (s.Contains("2")) Instantiate(getAttacker(), position, Quaternion.Euler(0, 90, 0));
+                if (s.Contains("4")) Instantiate(getAttacker(), position, Quaternion.Euler(0, 180, 0));
+                if (s.Contains("8")) Instantiate(getAttacker(), position, Quaternion.Euler(0, 270, 0));
 
                 if (s.Contains("r")) Instantiate(ravine, position, Quaternion.Euler(0, 90, 0));
+                if (s.Contains("R")) Instantiate(rock, position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
