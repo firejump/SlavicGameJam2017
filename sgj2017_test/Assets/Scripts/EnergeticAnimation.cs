@@ -16,6 +16,6 @@ public class EnergeticAnimation : MonoBehaviour {
         float t = Time.time - t0;
         float p = Mathf.Repeat(t, JUMP_DURATION) / JUMP_DURATION;
         float h = -p * (p - 1);
-        transform.position = new Vector3(0, h, 0);
+        transform.localPosition = new Vector3(0, h, 0);
 	}
 }

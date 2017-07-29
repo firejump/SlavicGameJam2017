@@ -8,7 +8,7 @@ public class CreatePlayer : MonoBehaviour {
 	void Start () {
         GameObject playerPlaceholder = gameObject;
         GameObject playerModel = GameState.getInstance().getPlayerState().createPlayerObject();
-        playerModel.transform.SetParent(playerPlaceholder.transform);
+        playerModel.transform.SetParent(playerPlaceholder.transform, false);
 	}
 	
 	// Update is called once per frame
