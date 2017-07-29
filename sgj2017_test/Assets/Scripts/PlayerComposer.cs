@@ -27,6 +27,7 @@ public class CubeComposer : PlayerComposer
     public override void compose(GameObject playerObject)
     {
         var body = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        body.transform.Translate(new Vector3(0, 0.5f, 0));
         body.transform.SetParent(playerObject.transform);
     }
 }
@@ -36,6 +37,7 @@ public class BallComposer : PlayerComposer
     public override void compose(GameObject playerObject)
     {
         var body = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        body.transform.Translate(new Vector3(0, 0.5f, 0));
         body.transform.SetParent(playerObject.transform);
     }
 }
@@ -59,7 +61,11 @@ public class JumpComposer : PlayerComposer
 {
     public override void compose(GameObject playerObject)
     {
-        //TODO add jumpo action
+        GameObject animTemplate = Resources.Load<GameObject>("Prefabs/JumpWrapper");
+        GameObject animWrapper = GameObject.Instantiate(animTemplate);
+        var body = playerObject.transform.GetChild(0);
+        body.SetParent(animWrapper.transform);
+        animWrapper.transform.SetParent(playerObject.transform);
     }
 }
 
@@ -67,7 +73,10 @@ public class LampComposer : PlayerComposer
 {
     public override void compose(GameObject playerObject)
     {
-        // TODO add light source
+        GameObject template = Resources.Load<GameObject>("Prefabs/Photophore");
+        GameObject child = GameObject.Instantiate(template);
+        var body = playerObject.transform.GetChild(0);
+        child.transform.SetParent(body);
     }
 }
 

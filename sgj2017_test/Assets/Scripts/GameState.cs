@@ -6,12 +6,13 @@
 
     private void setPlayerDefaults()
     {
-        playerState.setFeature("shape", "cube");
+        playerState.setFeature("shape", "ball");
         playerState.setFeature("size", "m");
         playerState.setFeature("color", "yellow");
-        playerState.setFeature("character", "lazy");
-        playerState.setFeature("lumination", "none");
+        playerState.setFeature("character", "energetic");
+        playerState.setFeature("lumination", "shiny");
     }
+
 
     public static GameState getInstance()
     {
@@ -23,6 +24,16 @@
     public PlayerState getPlayerState()
     {
         return playerState;
+    }
+
+    public void updatePlayerState(object slotsValues)
+    {
+        //TODO set player features depending on slots values
+    }
+
+    public void generateSlotsRules()
+    {
+
     }
 
     private PlayerState playerState;
