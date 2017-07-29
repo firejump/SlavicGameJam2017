@@ -27,23 +27,24 @@ public class SpriteChanger : MonoBehaviour {
 		GetComponent<Image>().sprite  = spr;			
 	}
 
-
-
 	IEnumerator MyCoroutine(float waitTime){
 		//http://www.unitygeek.com/coroutines-in-unity3d/
-		Debug.Log("cr"); 
 		//yield return null; // resumes after all update() on the next frame
 		while (true){
 			yield return new WaitForSeconds(waitTime); // resumes after all update() on the next frame 
 			SetImg();
 		}
 	}
-	void StopCoroutines(){
+	public void StopCoroutines(){
 		StopCoroutine (coroutineRef);
 	}
 
 	void Start () {
 		SetImg ();
+		//coroutineRef=MyCoroutine(waitTime);
+		//StartCoroutine (coroutineRef);
+	}
+	public void StartCoroutines(){
 		coroutineRef=MyCoroutine(waitTime);
 		StartCoroutine (coroutineRef);
 	}
