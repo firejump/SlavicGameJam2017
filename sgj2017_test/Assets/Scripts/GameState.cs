@@ -38,4 +38,5 @@
 
     private PlayerState playerState;
     private static GameState instance;
+    public bool gameOver;
 }

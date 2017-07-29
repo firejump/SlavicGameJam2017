@@ -14,7 +14,7 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     public GameObject flower;
     public GameObject ravine;
 
-    public GameObject player;
+    public GameObject player; // this is actually player and camera
 
     private string heightMap = "dUu         ";
 
@@ -159,6 +159,19 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     private int delayStartSteps = 120;
 
     void FixedUpdate () {
+        if (GameState.getInstance().gameOver) {
+            return;
+        }
+        /*
+            // EXPLODING
+            // player contains camera and player, we need to grab player prefab only.
+            GameObject actualPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
+            ParticleExploderScript.Explode(actualPlayer, player.GetComponent<Transform>().position);
+            Destroy(actualPlayer);
+            timeStepsElapsed++;
+            return;
+        */
+
         if (timeStepsElapsed >= delayStartSteps) {
             int timeStepsSinceMovingStarts = timeStepsElapsed - delayStartSteps;
             int prevWaypointId = timeStepsSinceMovingStarts / timeStepsPerWaypoint;
