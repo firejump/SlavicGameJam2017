@@ -31,7 +31,7 @@ public class RavineHandler : ObstacleHandler {
     }
     public override void onHit(MonoBehaviour obstacle)
     {
-        explodePlayer();
+        //explodePlayer();
     }
 }
 
@@ -44,7 +44,7 @@ public class FlowerHandler : ObstacleHandler
     }
     public override void onHit(MonoBehaviour obstacle) {
         obstacle.GetComponentInChildren<Animator>().SetBool("killing", true);
-        explodePlayer();
+        //explodePlayer();
     }
 }
 
@@ -58,6 +58,15 @@ public class SlopeHandler : ObstacleHandler
     public override void onHit(MonoBehaviour obstacle)
     {
         // TODO use other animation
-        explodePlayer();
+        //explodePlayer();
+    }
+}
+
+public class DarknessHandler : ObstacleHandler {
+    public override bool check() {
+        return GameState.getInstance().getPlayerState().checkFeature("lumination", "none");
+    }
+    public override void onHit(MonoBehaviour obstacle) {
+        //explodePlayer();
     }
 }

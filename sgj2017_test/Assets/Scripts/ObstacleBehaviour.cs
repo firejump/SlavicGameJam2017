@@ -9,6 +9,7 @@ public class ObstacleBehaviour : MonoBehaviour {
     {
         { "ravine", new RavineHandler() },
         { "flower", new FlowerHandler() },
+        { "darkness", new DarknessHandler() },
         { "slope", new SlopeHandler() }
     };
 

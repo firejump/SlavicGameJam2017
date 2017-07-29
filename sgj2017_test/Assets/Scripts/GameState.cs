@@ -14,11 +14,11 @@ public class GameState {
 
     private void setPlayerDefaults()
     {
-        playerState.setFeature("shape", "ball");
+        playerState.setFeature("shape", "cube");
         playerState.setFeature("size", "m");
-        playerState.setFeature("color", "yellow");
+        playerState.setFeature("color", "red");
         playerState.setFeature("character", "energetic");
-        playerState.setFeature("lumination", "shiny");
+        playerState.setFeature("lumination", "none");
     }
 
 
