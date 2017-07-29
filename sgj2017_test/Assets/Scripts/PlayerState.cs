@@ -35,4 +35,9 @@ public class PlayerState {
     {
         features[name] = value;
     }
+
+    public bool checkFeature(string name, string value)
+    {
+        return features[name] == value;
+    }
 }
