@@ -8,10 +8,17 @@ public class PlayerState {
     {
         { "shape:cube", new CubeComposer() },
         { "shape:ball", new BallComposer() },
-        { "size:m", new SizeComposer(1) },
-        { "color:yellow", new ColorComposer(null) },
+        { "size:s", new SizeComposer(0.67f) },
+        { "size:m", new SizeComposer(1.00f) },
+        { "size:l", new SizeComposer(1.50f) },
+        { "color:yellow", new ColorComposer(Resources.Load<Material>("ColorMaterials/Yellow")) },
+        { "color:red", new ColorComposer(Resources.Load<Material>("ColorMaterials/Red")) },
+        { "color:green", new ColorComposer(Resources.Load<Material>("ColorMaterials/Green")) },
+        { "color:blue", new ColorComposer(Resources.Load<Material>("ColorMaterials/Blue")) },
         { "character:lazy", new EmptyComposer() },
-        { "lumination:none", new EmptyComposer() }
+        { "character:energetic", new JumpComposer() },
+        { "lumination:none", new EmptyComposer() },
+        { "lumination:shiny", new LampComposer() }
     };
 
     private Dictionary<string, string> features = new Dictionary<string, string>();

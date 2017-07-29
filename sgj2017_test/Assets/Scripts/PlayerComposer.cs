@@ -44,13 +44,12 @@ public class ColorComposer : PlayerComposer
 {
     public ColorComposer(Material material)
     {
-        // TODO set material here
         this.material = material;
     }
     public override void compose(GameObject playerObject)
     {
         var body = playerObject.transform.GetChild(0);
-        //body.GetComponent<MeshRenderer>().material = material;
+        body.GetComponent<MeshRenderer>().material = material;
     }
 
     private Material material;
