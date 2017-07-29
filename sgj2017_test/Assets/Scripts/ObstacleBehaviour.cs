@@ -24,6 +24,7 @@ public class ObstacleBehaviour : MonoBehaviour {
         if (handlerObject.check())
         {
             UnityEngine.Debug.Log("GAME OVER");
+            handlerObject.onHit();
             //TODO call some GameState.getInstance().gameOver();
         }
     }

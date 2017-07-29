@@ -19,7 +19,7 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     public GameObject darkness;
 
     // 0 red 1 green 2 blue
-    private int attacker = 2;
+    private int attacker = 0;
     private GameObject getAttacker() {
         if (attacker == 0) return attackerRed;
         if (attacker == 1) return attackerGreen;

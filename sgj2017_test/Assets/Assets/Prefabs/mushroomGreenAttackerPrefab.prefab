@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 95808795847013642}
   m_Layer: 0
   m_Name: animationScaler
-  m_TagString: Untagged
+  m_TagString: mushroomAnimator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +119,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4441872384592796}
+  - component: {fileID: 135439126575848002}
+  - component: {fileID: 114035182884463108}
   m_Layer: 0
   m_Name: mushroomGreenAttackerPrefab
   m_TagString: Untagged
@@ -396,6 +398,30 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114035182884463108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940736386226606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d415b09a2806a414394244924df5d188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: flower
+--- !u!135 &135439126575848002
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940736386226606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!205 &205179551738881356
 LODGroup:
   m_ObjectHideFlags: 1
