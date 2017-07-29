@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class PlayerState {
-    public static string[] FEATURE_SEQUENCE = { "shape", "size", "color", "character", "lumination" };
+    public static string[] FEATURE_SEQUENCE = { "shape", "color", "lumination", "size", "character" };
 
     private static Dictionary<string, PlayerComposer> PLAYER_COMPOSERS = new Dictionary<string, PlayerComposer>()
     {

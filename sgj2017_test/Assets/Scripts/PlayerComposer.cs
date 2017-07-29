@@ -15,8 +15,9 @@ public class SizeComposer : PlayerComposer
     public override void compose(GameObject playerObject)
     {
         // scale first child, which should be player body
-        var body = playerObject.transform.GetChild(0).gameObject;
-        body.transform.localScale = new UnityEngine.Vector3(scale, scale, scale);
+        var body = playerObject.transform.GetChild(0);
+        body.localScale = new UnityEngine.Vector3(scale, scale, scale);
+        body.Translate(new Vector3(0, 0.5f, 0) * (scale - 1));
     }
 
     private float scale;
