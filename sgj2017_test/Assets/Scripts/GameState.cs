@@ -66,6 +66,7 @@ public class GameState {
  
 
     public bool gameOver;
+    public string bacteriaName;
 
     internal void restartGame() {
         ObstacleHandler.EXPLODED = false;
