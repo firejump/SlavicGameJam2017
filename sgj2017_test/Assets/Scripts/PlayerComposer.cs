@@ -30,6 +30,8 @@ public class CubeComposer : PlayerComposer
         var body = GameObject.CreatePrimitive(PrimitiveType.Cube);
         body.transform.Translate(new Vector3(0, 0.5f, 0));
         body.transform.SetParent(playerObject.transform, false);
+        // set tag to mark the player
+        body.tag = "Player";
     }
 }
 
@@ -40,6 +42,8 @@ public class BallComposer : PlayerComposer
         var body = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         body.transform.Translate(new Vector3(0, 0.5f, 0));
         body.transform.SetParent(playerObject.transform, false);
+        // set tag to mark the player
+        body.tag = "Player";
     }
 }
 
