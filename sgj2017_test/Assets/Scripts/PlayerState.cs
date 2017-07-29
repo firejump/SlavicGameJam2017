@@ -31,7 +31,9 @@ public class PlayerState {
     }
 
     private Dictionary<string, string> features = new Dictionary<string, string>();
-
+    public string getFeature(string name) {
+        return features[name];
+    }
     public GameObject createPlayerObject() {
         GameObject playerObject = new GameObject();
         foreach (string feature in FEATURE_SEQUENCE) {

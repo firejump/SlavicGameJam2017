@@ -19,7 +19,8 @@ public class FlowerHandler : ObstacleHandler
 {
     public override bool check()
     {
-        return !GameState.getInstance().getPlayerState().checkFeature("color", "green");
+        Debug.Log("Flower check : " + GameState.getInstance().getPlayerState().getFeature("color") + " vs " + GameState.getInstance().getAttackerColorString());
+        return !GameState.getInstance().getPlayerState().checkFeature("color", GameState.getInstance().getAttackerColorString());
     }
     public override void onHit(MonoBehaviour obstacle) {
         obstacle.GetComponentInChildren<Animator>().SetBool("killing", true);

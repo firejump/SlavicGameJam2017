@@ -1,6 +1,12 @@
 ﻿using System.Collections.Generic;
 
 public class GameState {
+    // 0 red 1 green 2 blue
+    public int attackerColor = 0;
+    public string getAttackerColorString() {
+        return attackerColor == 0 ? ("red") : (attackerColor == 1 ? "green" : "blue");
+    }
+
     private GameState() {
         playerState = new PlayerState();
         setPlayerDefaults();
