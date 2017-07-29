@@ -13,18 +13,20 @@ public class SpriteChanger : MonoBehaviour {
 
 	void Awake () {
 	}
-
+	public void SetImg(int frame){
+		string filename = frame.ToString ().PadLeft (3, '0');
+		Sprite spr = Resources.Load<Sprite>("Sprites/"+ filename);
+		//Debug.Log (spr);
+		GetComponent<Image>().sprite  = spr;
+	}
 	// Use this for initialization
-	void SetImg(){
+	public void SetImg(){
 		//for int min [inclusive] and max [exclusive] for float inclusive on both ends
 		int rand = Random.Range (1, noElems);
 		//losowanie bez powtorzen
 		rng = rand == rng ? (rand + 1) % (noElems-1) : rand; 
 		//filenames are in range 000.png - 012.png
-		string filename = rng.ToString ().PadLeft (3, '0');
-		Sprite spr = Resources.Load<Sprite>("Sprites/"+ filename);
-		//Debug.Log (spr);
-		GetComponent<Image>().sprite  = spr;			
+		SetImg(rng);
 	}
 
 	IEnumerator MyCoroutine(float waitTime){
@@ -40,7 +42,7 @@ public class SpriteChanger : MonoBehaviour {
 	}
 
 	void Start () {
-		SetImg ();
+		//SetImg ();
 		//coroutineRef=MyCoroutine(waitTime);
 		//StartCoroutine (coroutineRef);
 	}
