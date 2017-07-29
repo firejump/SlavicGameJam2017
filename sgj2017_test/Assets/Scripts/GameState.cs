@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class GameState {
     // 0 red 1 green 2 blue
@@ -15,10 +16,10 @@ public class GameState {
     private void setPlayerDefaults()
     {
         playerState.setFeature("shape", "cube");
-        playerState.setFeature("size", "m");
+        playerState.setFeature("size", "l");
         playerState.setFeature("color", "blue");
-        playerState.setFeature("character", "energetic");
-        playerState.setFeature("lumination", "shiny");
+        playerState.setFeature("character", "lazy");
+        playerState.setFeature("lumination", "none");
     }
 
 
@@ -59,5 +60,13 @@ public class GameState {
 
     private PlayerState playerState;
     private static GameState instance;
+ 
+
     public bool gameOver;
+
+    internal void restartGame() {
+        ObstacleHandler.EXPLODED = false;
+        gameOver = false;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("banditScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+    }
 }

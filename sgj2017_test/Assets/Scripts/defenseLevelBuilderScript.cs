@@ -206,9 +206,16 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     private int timeStepsElapsed = 0;
     private int timeStepsPerWaypoint = 30;
     private int delayStartSteps = 120;
+    private int delayGameOver = 200;
+    private int gameOverTime = 0;
 
     void FixedUpdate () {
         if (GameState.getInstance().gameOver) {
+            if (gameOverTime == 0) gameOverTime = timeStepsElapsed;
+            timeStepsElapsed++;
+            if (timeStepsElapsed > gameOverTime + delayGameOver) {
+                GameState.getInstance().restartGame();
+            }
             return;
         }
         /*

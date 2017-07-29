@@ -1,25 +1,29 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
-public abstract class ObstacleHandler
-{
+public abstract class ObstacleHandler {
     public abstract bool check();
     public abstract void onHit(MonoBehaviour obstacle);
 
     // prevent multiple triggering
-    private static bool EXPLODED = false;
+    public static bool EXPLODED = false;
 
     /**
      * Helper method to make player explosion animation
      */
-    public static void explodePlayer()
-    {
-        if (!EXPLODED)
-        {
+    private static IEnumerator explodeDelayed() {
+        yield return new WaitForSeconds(0.3f);
+        GameObject actualPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
+        ParticleExploderScript.Explode(actualPlayer, actualPlayer.GetComponent<Transform>().position);
+        GameObject.Destroy(actualPlayer);
+    }
+    public static void explodePlayer(MonoBehaviour obstacle) {
+        if (!EXPLODED) {
             EXPLODED = true;
-            GameObject actualPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
-            ParticleExploderScript.Explode(actualPlayer, actualPlayer.GetComponent<Transform>().position);
-            GameObject.Destroy(actualPlayer);
+            obstacle.StartCoroutine(explodeDelayed());
+
         }
     }
 }
@@ -31,7 +35,7 @@ public class RavineHandler : ObstacleHandler {
     }
     public override void onHit(MonoBehaviour obstacle)
     {
-        explodePlayer();
+        explodePlayer(obstacle);
     }
 }
 
@@ -44,7 +48,7 @@ public class FlowerHandler : ObstacleHandler
     }
     public override void onHit(MonoBehaviour obstacle) {
         obstacle.GetComponentInChildren<Animator>().SetBool("killing", true);
-        explodePlayer();
+        explodePlayer(obstacle);
     }
 }
 
@@ -58,7 +62,7 @@ public class SlopeHandler : ObstacleHandler
     public override void onHit(MonoBehaviour obstacle)
     {
         // TODO use other animation
-        explodePlayer();
+        explodePlayer(obstacle);
     }
 }
 
@@ -67,6 +71,6 @@ public class DarknessHandler : ObstacleHandler {
         return GameState.getInstance().getPlayerState().checkFeature("lumination", "none");
     }
     public override void onHit(MonoBehaviour obstacle) {
-        explodePlayer();
+        explodePlayer(obstacle);
     }
 }

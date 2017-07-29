@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleExploderScript : MonoBehaviour {
+public class ParticleExploderScript {
 
 
     private static int particles = 100;
     private static float particleScale = 0.15f;
 
     public static void Explode(GameObject particleBase, Vector3 position) {
-        GameObject particleTemplate = Instantiate(particleBase);
+        GameObject particleTemplate = GameObject.Instantiate(particleBase);
         stripObject(particleTemplate);
         if (!particleTemplate.GetComponent<Rigidbody>())
         {
@@ -34,7 +34,9 @@ public class ParticleExploderScript : MonoBehaviour {
 
     private static void stripObject(GameObject o)
     {
-        o.GetComponentInChildren<Light>().enabled = false;
+
+        Light l = o.GetComponentInChildren<Light>();
+        if (l != null) { l.enabled = false; }
     }
 
 }
