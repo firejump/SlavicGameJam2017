@@ -16,9 +16,9 @@ public class GameState {
     {
         playerState.setFeature("shape", "cube");
         playerState.setFeature("size", "m");
-        playerState.setFeature("color", "red");
+        playerState.setFeature("color", "blue");
         playerState.setFeature("character", "energetic");
-        playerState.setFeature("lumination", "none");
+        playerState.setFeature("lumination", "shiny");
     }
 
 

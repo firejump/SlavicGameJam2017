@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParticleExploderScript : MonoBehaviour {
 
 
-    private static int particles = 3;
+    private static int particles = 100;
     private static float particleScale = 0.15f;
 
     public static void Explode(GameObject particleBase, Vector3 position) {
@@ -34,11 +34,7 @@ public class ParticleExploderScript : MonoBehaviour {
 
     private static void stripObject(GameObject o)
     {
-        // remove children to avoid unwanted interactions
-        //while (o.transform.childCount > 0)
-        //{
-        //    Destroy(o.transform.GetChild(0));
-        //}
+        o.GetComponentInChildren<Light>().enabled = false;
     }
 
 }
