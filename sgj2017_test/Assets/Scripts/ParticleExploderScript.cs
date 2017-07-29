@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParticleExploderScript : MonoBehaviour {
 
 
-    private static int particles = 100;
+    private static int particles = 200;
     private static float particleScale = 0.15f;
 
     public static void Explode(GameObject particleBase, Vector3 position) {
@@ -22,6 +22,7 @@ public class ParticleExploderScript : MonoBehaviour {
             }
             particle.GetComponent<Rigidbody>().isKinematic = false;
             particle.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
+            particle.GetComponent<Rigidbody>().useGravity = true;
             particle.GetComponent<Rigidbody>().mass = Random.Range(0.7f, 1.3f);
             particle.GetComponent<Rigidbody>().AddExplosionForce(200f, position, 2);
         }
