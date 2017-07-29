@@ -11,23 +11,31 @@ public class defenseLevelBuilderScript : MonoBehaviour {
     public GameObject grass;
     public GameObject grassPochyly;
     public GameObject tileLight;
+    public GameObject flower;
+    public GameObject ravine;
 
     public GameObject player;
 
-    private string heightMap = "dUu     ";
+    private string heightMap = "dUu         ";
 
     // WARNING: map can't have roads on the map edge! (waypoints algo will break)
     // WARNING: start & endpoint can only have one road neighbour
     // WARNING: roads can't touch each other on edges (corners are OK)
     // 1,7,9,3: rotated road (like on numpad)
+    // 8 6 2 4 - rotated attacker flower
     // " " == grass
     // s == start point
+    // r = ravine (wąwóz)
     private string[,] map = {
         { " ", " ", " ", " ", " " , " ", " ", " "},
         { " ", "7", "-", "-", "-" , "9", " ", " "},
         { " ", "|", " ", " ", " " , "|", " ", " "},
-        { " ", "|", " ", " ", " " , "1", "-", " "},
+        { " 6", "|", " ", " ", " " , "|", " ", " "},
+        { " ", "|", " 4", " ", " " , "1", "-", " "},
         { " ", "1", "-", "9", " ", " ", " ", " "},
+        { " ", " ", " ",  "|", " " , " ", " ", " "},
+        { " ", " ", " ",  "|r", " " , " ", " ", " "},
+        { " ", " ", " ",  "|", " " , " ", " ", " "},
         { " ", " ", " ",  "|", " " , " ", " ", " "},
         { " ", " ", " ",  "|s", " " , " ", " ", " "},
         { " ", " ", " ", " ", " " , " ", " ", " "},
@@ -40,55 +48,59 @@ public class defenseLevelBuilderScript : MonoBehaviour {
 
     void Start () {
         GenerateWaypoints();
-        for (int x = 0; x < map.GetLength(0); x++)
-        {
+        player.GetComponent<Transform>().position = waypoints[0];
+        instantiateMapTiles();	
+	}
+
+    private void instantiateMapTiles() {
+        for (int x = 0; x < map.GetLength(0); x++) {
             float y = 0;
-           
+
             char height = heightMap[x];
-            if (height == 'U')
-            {
+            if (height == 'U') {
                 y = 0.5f;
             }
-            for (int z = 0; z < map.GetLength(1); z++)
-            {
+            for (int z = 0; z < map.GetLength(1); z++) {
                 string s = map[x, z];
                 bool hasLight = s[0] != ' ';
-                if (hasLight)
-                {
-                    Instantiate(tileLight, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+                Vector3 position = new Vector3(x, y, z);
+                if (hasLight) {
+                    Instantiate(tileLight, position, Quaternion.Euler(0, 0, 0));
                 }
-                if (s[0] == ' ')
-                {
-                    InstantiatePochyly(height, grass, grassPochyly, new Vector3(x, y, z), Quaternion.Euler(0,0,0));
+                // road, grass
+                if (s[0] == ' ') {
+                    InstantiatePochyly(height, grass, grassPochyly, position, Quaternion.Euler(0, 0, 0));
                 }
-                if (s[0] == '|')
-                {
-                    InstantiatePochyly(height, road, roadPochyly, new Vector3(x, y, z), Quaternion.Euler(0,90,0));
+                if (s[0] == '|') {
+                    InstantiatePochyly(height, road, roadPochyly, position, Quaternion.Euler(0, 90, 0));
                 }
-                if (s[0] == '-')
-                {
-                    Instantiate(road, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+                if (s[0] == '-') {
+                    Instantiate(road, position, Quaternion.Euler(0, 0, 0));
                 }
-                if (s[0] == '9')
-                {
-                    Instantiate(roadTurn, new Vector3(x, y, z), Quaternion.Euler(0, 180, 0));
+                if (s[0] == '9') {
+                    Instantiate(roadTurn, position, Quaternion.Euler(0, 180, 0));
                 }
-                if (s[0] == '3')
-                {
-                    Instantiate(roadTurn, new Vector3(x, y, z), Quaternion.Euler(0, 270, 0));
+                if (s[0] == '3') {
+                    Instantiate(roadTurn, position, Quaternion.Euler(0, 270, 0));
                 }
-                if (s[0] == '1')
-                {
-                    Instantiate(roadTurn, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+                if (s[0] == '1') {
+                    Instantiate(roadTurn, position, Quaternion.Euler(0, 0, 0));
                 }
-                if (s[0] == '7')
-                {
-                    Instantiate(roadTurn, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
+                if (s[0] == '7') {
+                    Instantiate(roadTurn, position, Quaternion.Euler(0, 90, 0));
                 }
+
+                // flower
+
+                if (s.Contains("6")) Instantiate(flower, position, Quaternion.Euler(0, 0, 0));
+                if (s.Contains("2")) Instantiate(flower, position, Quaternion.Euler(0, 90, 0));
+                if (s.Contains("4")) Instantiate(flower, position, Quaternion.Euler(0, 180, 0));
+                if (s.Contains("8")) Instantiate(flower, position, Quaternion.Euler(0, 270, 0));
+
+                if (s.Contains("r")) Instantiate(ravine, position, Quaternion.Euler(0, 90, 0));
             }
         }
-		
-	}
+    }
 
     private void InstantiatePochyly(char height, GameObject terrain, GameObject terrainPochyly, Vector3 position, Quaternion baseRotation)
     {
@@ -136,20 +148,28 @@ public class defenseLevelBuilderScript : MonoBehaviour {
 
     private List<Vector3> waypoints = new List<Vector3>();
     private void AddWaypoint(int x, int z) {
-        // TODO height!
-        waypoints.Add(new Vector3(x, 2, z));
+        float y = 1;
+        char height = heightMap[x];
+        if (height == 'U') y = 1.5f;
+        if(height == 'u' || height == 'd') y = 1.25f;
+        waypoints.Add(new Vector3(x, y, z));
     }
     private int timeStepsElapsed = 0;
-    private int timeStepsPerWaypoint = 20;
-    void FixedUpdate () {
-        int prevWaypointId = timeStepsElapsed / timeStepsPerWaypoint;
-        if (prevWaypointId + 1 >= waypoints.Count) {
-            return;
-        }
-        int frameId = timeStepsElapsed % timeStepsPerWaypoint;
-        Vector3 newPos = waypoints[prevWaypointId+1] * ((float)frameId / timeStepsPerWaypoint) + waypoints[prevWaypointId] * (1 - (float)frameId / timeStepsPerWaypoint);
+    private int timeStepsPerWaypoint = 30;
+    private int delayStartSteps = 120;
 
-        player.GetComponent<Transform>().position = newPos;
+    void FixedUpdate () {
+        if (timeStepsElapsed >= delayStartSteps) {
+            int timeStepsSinceMovingStarts = timeStepsElapsed - delayStartSteps;
+            int prevWaypointId = timeStepsSinceMovingStarts / timeStepsPerWaypoint;
+            if (prevWaypointId + 1 >= waypoints.Count) {
+                return;
+            }
+            int frameId = timeStepsSinceMovingStarts % timeStepsPerWaypoint;
+            Vector3 newPos = waypoints[prevWaypointId + 1] * ((float)frameId / timeStepsPerWaypoint) + waypoints[prevWaypointId] * (1 - (float)frameId / timeStepsPerWaypoint);
+
+            player.GetComponent<Transform>().position = newPos;
+        }
         timeStepsElapsed++;
 	}
 }
