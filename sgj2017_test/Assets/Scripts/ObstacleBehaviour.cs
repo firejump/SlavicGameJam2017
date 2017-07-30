@@ -25,8 +25,9 @@ public class ObstacleBehaviour : MonoBehaviour {
         if (handlerObject.check())
         {
             UnityEngine.Debug.Log("GAME OVER");
-            handlerObject.onHit(this);
             GameState.getInstance().gameOver = true;
+            GameObject.FindGameObjectWithTag("Failure").GetComponent<Animator>().SetBool("gameOver", true);
+            handlerObject.onHit(this);
         }
     }
 
