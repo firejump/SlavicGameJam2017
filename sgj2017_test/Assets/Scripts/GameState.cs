@@ -7,6 +7,7 @@ public class GameState {
     public string getAttackerColorString() {
         return attackerColor == 0 ? ("red") : (attackerColor == 1 ? "green" : "blue");
     }
+	public List<int> lastGameState=new List<int>();
 
     private GameState() {
         playerState = new PlayerState();
@@ -37,6 +38,7 @@ public class GameState {
 
     public void updatePlayerState(List<int> slots)
     {
+		
         List<KeyValuePair<string, string>> featuresValues = PlayerState.getFeaturesAndValues();
         foreach (int slot in slots) {
             if (slot >= featuresValues.Count) {
@@ -46,6 +48,7 @@ public class GameState {
             KeyValuePair<string, string> featureValue = featuresValues[slot];
             getPlayerState().setFeature(featureValue.Key, featureValue.Value);
         }
+		lastGameState = slots;
     }
 
     public void generateSlotsRules()
@@ -63,6 +66,7 @@ public class GameState {
  
 
     public bool gameOver;
+    public string bacteriaName;
 
     internal void restartGame() {
         ObstacleHandler.EXPLODED = false;

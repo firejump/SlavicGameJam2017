@@ -11,11 +11,19 @@ public class Recombine : MonoBehaviour {
 	void Start () {
 		text = GetComponentInChildren<Text>();
 		lockButtons = GameObject.FindGameObjectsWithTag ("LockButton");
+		GameState GS = GameState.getInstance();
+		//GS.lastGameState.Count != 0
+		for (int i=0; i<lockButtons.Length;i++) {
+			if (GS.lastGameState.Count != 0) {
+				lockButtons [i].GetComponent<Slot> ().initSlot (GS.lastGameState [i]);
+			} else {
+				lockButtons [i].GetComponent<Slot> ().initSlot (-1);
+			}
+		}
+		saveGenome ();
 	}
 	public void toggleSlots(){
 		active = !active;
-
-
 		foreach (GameObject button in lockButtons) {
 			if (!active) {
 				text.text="STOP";
@@ -39,6 +47,7 @@ public class Recombine : MonoBehaviour {
 		}
 		GameState GS = GameState.getInstance();
 		GS.updatePlayerState(PlayerState);
+
 		//Debug.Log (PlayerState.ToString());
 		string verboseList="";
 		foreach(int e in PlayerState){

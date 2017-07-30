@@ -71,8 +71,10 @@ public class defenseLevelBuilderScript : MonoBehaviour {
         player.GetComponent<Transform>().position = waypoints[0];
         instantiateMapTiles();
         instantiateBorders();
-        bacteriaNameText.GetComponent<UnityEngine.UI.Text>().text = BacteriaNamesScript.getNewName();
-	}
+        GameState.getInstance().bacteriaName = BacteriaNamesScript.getNewName();
+        bacteriaNameText.GetComponent<UnityEngine.UI.Text>().text = GameState.getInstance().bacteriaName;
+
+    }
 
 
     private void instantiateMapTiles() {
