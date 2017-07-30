@@ -72,7 +72,7 @@ public class defenseLevelBuilderScript : MonoBehaviour {
         instantiateMapTiles();
         instantiateBorders();
         GameState.getInstance().bacteriaName = BacteriaNamesScript.getNewName();
-        bacteriaNameText.GetComponent<UnityEngine.UI.Text>().text = GameState.getInstance().bacteriaName
+        bacteriaNameText.GetComponent<UnityEngine.UI.Text>().text = GameState.getInstance().bacteriaName;
 
     }
 
