@@ -9,22 +9,25 @@ public class Slot : MonoBehaviour {
 	private Button button;
 	private SpriteChanger[] imgs;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		text = GetComponentInChildren<Text> ();
 		button = gameObject.GetComponent<Button> ();
 		imgs = GetComponentsInChildren<SpriteChanger> ();
+		//initSlot ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public void initSlot(int frame){
+		if (frame!=-1) {
+			imgs [0].SetImg (frame);
+		} else {
+			imgs[0].SetImg();	
+		}
 	}
+
+
 	public void StartMachine(){
 		button.interactable = false;
 		if (active) {
-			foreach (SpriteChanger img in imgs) {
-				img.StartCoroutines();
-			}
+				imgs[0].StartCoroutines();
 		}
 	} 
 	public int getSlotState(){
@@ -33,17 +36,13 @@ public class Slot : MonoBehaviour {
 	public void StopMachine(){
 		button.interactable = true;
 		if (active) {
-			foreach (SpriteChanger img in imgs) {
-				img.StopCoroutines ();
-			}
+			imgs[0].StopCoroutines ();
 		}
 	}
 
 	public void ToggleSlotMachine(){
 		active = !active;
 		text.text = active ? "Free": "Locked";
-		if (active) {
-		
-		}
+
 	}
 }
